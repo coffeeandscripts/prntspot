@@ -4,14 +4,19 @@
 
 #include <iostream>
 #include <string>
+#include <unistd.h>
 
 #include "prntspot.h"
 
 int main() {
 	prntspot printer;
-	std::cout << "Height: " << printer.max_height() << '\n';
-	std::cout << "Width:  " << printer.max_width() << '\n';
-	std::string test = "Test string";
-	printer.set_left_buffer(test);
+	printer.set_left_buffer("Loading: [");
+	printer.set_right_buffer("]");
 	printer.print_buffer();
+	for (int x=0; x < (printer.max_width() - 11); x++) {
+		printer.set_point_buffer("#", 10+x);
+		usleep(500000);
+		printer.print_buffer();
+	}
+	printer.new_line();
 }
