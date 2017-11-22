@@ -163,6 +163,6 @@ int prntspot::set_point_buffer(std::string str, int color, int style, int offset
 void prntspot::set_window_size() {
 	struct winsize w;
 	ioctl(0, TIOCGWINSZ, &w);
-	window_width = w.ws_row;
-	window_height = w.ws_col;
+	window_width = w.ws_col;
+	window_height = w.ws_row;
 }

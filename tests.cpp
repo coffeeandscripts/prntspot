@@ -14,7 +14,7 @@ int main() {
 	printer.set_right_buffer("]");
 	printer.print_buffer();
 	for (int x=0; x < (printer.max_width() - 11); x++) {
-		printer.set_point_buffer("#", 10+x);
+		printer.set_point_buffer("#", 34, 1, 10+x);
 		usleep(500000);
 		printer.print_buffer();
 	}
