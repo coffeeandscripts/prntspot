@@ -29,7 +29,8 @@ int main() {
 }
 ~~~
 This will show the following result:
-![Workflow](https://raw.githubusercontent.com/coffeeandscripts/prntspot/master/example.gif "Above code results in this output")
+
+![Workflow](https://raw.githubusercontent.com/coffeeandscripts/prntspot/master/example.gif "Above code results in this output" | width=800)
 
 The library includes the following public functions:
 ~~~
