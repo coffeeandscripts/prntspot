@@ -10,7 +10,8 @@
 
 int main() {
 	prntspot printer;
-	printer.set_left_buffer("Loading: [");
+	printer.set_left_buffer("Loading:");
+	printer.append_buffer(" [");
 	printer.set_right_buffer("]");
 	printer.print_buffer();
 	for (int x=0; x < (printer.max_width() - 11); x++) {

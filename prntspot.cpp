@@ -76,7 +76,7 @@ int prntspot::max_width() {
 	return window_width;
 }
 
-int prntspot::set_left_buffer(std::string str) {
+void prntspot::set_left_buffer(std::string str) {
 	bufferCh* ch = first_ch;
 	buffer_len = str.size();
 	for (int i=0; i < buffer_len; i++) {
@@ -87,7 +87,7 @@ int prntspot::set_left_buffer(std::string str) {
 	ch->set_ch('\0');
 }
 
-int prntspot::set_left_buffer(std::string str, int color, int style) {
+void prntspot::set_left_buffer(std::string str, int color, int style) {
 	bufferCh* ch = first_ch;
 	buffer_len = str.size();
 	for (int i=0; i < buffer_len; i++) {
@@ -96,6 +96,34 @@ int prntspot::set_left_buffer(std::string str, int color, int style) {
 		ch = ch->return_next_ch();
 	}
 	ch->set_ch('\0');
+}
+
+void prntspot::append_buffer(std::string str) {
+	bufferCh* ch = first_ch;
+	while (ch->return_ch() != '\0') {
+		ch = ch->return_next_ch();
+	}
+	for (int i=0; i < str.size(); i++) {
+		ch->set_ch(str[i]);
+		ch->set_next_ch(new bufferCh);
+		ch = ch->return_next_ch();
+	}
+	ch->set_ch('\0');
+	buffer_len = buffer_len + str.size();
+}
+
+void prntspot::append_buffer(std::string str, int color, int style) {
+	bufferCh* ch = first_ch;
+	while (ch->return_ch() != '\0') {
+		ch = ch->return_next_ch();
+	}
+	for (int i=0; i < str.size(); i++) {
+		ch->set_ch(str[i], color, style);
+		ch->set_next_ch(new bufferCh);
+		ch = ch->return_next_ch();
+	}
+	ch->set_ch('\0');
+	buffer_len = buffer_len + str.size();
 }
 
 void prntspot::extend_buffer() {
@@ -112,7 +140,7 @@ void prntspot::extend_buffer() {
 	buffer_len = window_width;
 }
 
-int prntspot::set_right_buffer(std::string str) {
+void prntspot::set_right_buffer(std::string str) {
 	extend_buffer();
 	bufferCh* ch = first_ch;
 	for (int n=0; n < (buffer_len - str.size()); n++) {
@@ -124,7 +152,7 @@ int prntspot::set_right_buffer(std::string str) {
 	}
 }
 
-int prntspot::set_right_buffer(std::string str, int color, int style) {
+void prntspot::set_right_buffer(std::string str, int color, int style) {
 	extend_buffer();
 	bufferCh* ch = first_ch;
 	for (int n=0; n < (buffer_len - str.size()); n++) {
@@ -136,7 +164,7 @@ int prntspot::set_right_buffer(std::string str, int color, int style) {
 	}
 }
 
-int prntspot::set_point_buffer(std::string str, int offset) {
+void prntspot::set_point_buffer(std::string str, int offset) {
 	extend_buffer();
 	bufferCh* ch = first_ch;
 	for (int n=0; n < offset; n++) {
@@ -148,7 +176,7 @@ int prntspot::set_point_buffer(std::string str, int offset) {
 	}
 }
 
-int prntspot::set_point_buffer(std::string str, int color, int style, int offset) {
+void prntspot::set_point_buffer(std::string str, int color, int style, int offset) {
 	extend_buffer();
 	bufferCh* ch = first_ch;
 	for (int n=0; n < offset; n++) {

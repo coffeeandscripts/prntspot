@@ -25,12 +25,14 @@ class prntspot {
 	void new_line();
 	int max_height();
 	int max_width();
-	int set_left_buffer(std::string);
-	int set_right_buffer(std::string);
-	int set_point_buffer(std::string,int);
-	int set_left_buffer(std::string,int,int);
-	int set_right_buffer(std::string,int,int);
-	int set_point_buffer(std::string,int,int,int);
+	void set_left_buffer(std::string);
+	void append_buffer(std::string);
+	void set_right_buffer(std::string);
+	void set_point_buffer(std::string,int);
+	void set_left_buffer(std::string,int,int);
+	void append_buffer(std::string,int,int);
+	void set_right_buffer(std::string,int,int);
+	void set_point_buffer(std::string,int,int,int);
 	private:
 	int window_width;
 	int window_height;
