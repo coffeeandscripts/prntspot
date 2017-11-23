@@ -1,5 +1,5 @@
-// prntspot.cpp
-// desc: prntspot engine with functions and variables
+// prntspot.h
+// desc: header for prntspot and bufferCh
 // vers: 0.01
 
 #define BLACK_F 30

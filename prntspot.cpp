@@ -1,5 +1,5 @@
-// prntspot.h
-// desc: header for functions and classes
+// prntspot.cpp
+// desc: class function definitions for bufferCh and prntspot engine
 // vers: 0.01
 
 #include <sys/ioctl.h>
