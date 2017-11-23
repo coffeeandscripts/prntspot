@@ -30,7 +30,7 @@ int main() {
 ~~~
 This will show the following result:
 
-![Workflow](https://raw.githubusercontent.com/coffeeandscripts/prntspot/master/example.gif "Above code results in this output" =800x)
+<img src="https://raw.githubusercontent.com/coffeeandscripts/prntspot/master/example.gif" width="800px">
 
 The library includes the following public functions:
 ~~~
