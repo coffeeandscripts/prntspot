@@ -13,6 +13,7 @@ int main() {
 	printer.set_left_buffer("Loading:");
 	printer.append_buffer(" [");
 	printer.set_right_buffer("]");
+	printer.append_buffer(" Test");
 	printer.print_buffer();
 	for (int x=0; x < (printer.max_width() - 11); x++) {
 		printer.set_point_buffer("#", 34, 1, 10+x);

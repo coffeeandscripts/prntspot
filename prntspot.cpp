@@ -85,53 +85,69 @@ int prntspot::max_width() {
 }
 
 void prntspot::set_left_buffer(std::string str) {
-	bufferCh* ch = first_ch;
-	buffer_len = str.size();
-	for (int i=0; i < buffer_len; i++) {
-		ch->set_ch(str[i]);
-		ch->set_next_ch(new bufferCh);
-		ch = ch->return_next_ch();
+	if (str.size() <= max_width()) {
+		bufferCh* ch = first_ch;
+		buffer_len = str.size();
+		for (int i=0; i < buffer_len; i++) {
+			ch->set_ch(str[i]);
+			ch->set_next_ch(new bufferCh);
+			ch = ch->return_next_ch();
+		}
+		ch->set_ch('\0');
+	} else {
+		throw_error(1);
 	}
-	ch->set_ch('\0');
 }
 
 void prntspot::set_left_buffer(std::string str, int color, int style) {
-	bufferCh* ch = first_ch;
-	buffer_len = str.size();
-	for (int i=0; i < buffer_len; i++) {
-		ch->set_ch(str[i], color, style);
-		ch->set_next_ch(new bufferCh);
-		ch = ch->return_next_ch();
+	if (str.size() <= max_width()) {
+		bufferCh* ch = first_ch;
+		buffer_len = str.size();
+		for (int i=0; i < buffer_len; i++) {
+			ch->set_ch(str[i], color, style);
+			ch->set_next_ch(new bufferCh);
+			ch = ch->return_next_ch();
+		}
+		ch->set_ch('\0');
+	} else {
+		throw_error(1);
 	}
-	ch->set_ch('\0');
 }
 
 void prntspot::append_buffer(std::string str) {
-	bufferCh* ch = first_ch;
-	while (ch->return_ch() != '\0') {
-		ch = ch->return_next_ch();
+	if (buffer_len + str.size() <= max_width()) {
+		bufferCh* ch = first_ch;
+		while (ch->return_ch() != '\0') {
+			ch = ch->return_next_ch();
+		}
+		for (int i=0; i < str.size(); i++) {
+			ch->set_ch(str[i]);
+			ch->set_next_ch(new bufferCh);
+			ch = ch->return_next_ch();
+		}
+		ch->set_ch('\0');
+		buffer_len = buffer_len + str.size();
+	} else {
+		throw_error(1);
 	}
-	for (int i=0; i < str.size(); i++) {
-		ch->set_ch(str[i]);
-		ch->set_next_ch(new bufferCh);
-		ch = ch->return_next_ch();
-	}
-	ch->set_ch('\0');
-	buffer_len = buffer_len + str.size();
 }
 
 void prntspot::append_buffer(std::string str, int color, int style) {
-	bufferCh* ch = first_ch;
-	while (ch->return_ch() != '\0') {
-		ch = ch->return_next_ch();
+	if (buffer_len + str.size() <= max_width()) {
+		bufferCh* ch = first_ch;
+		while (ch->return_ch() != '\0') {
+			ch = ch->return_next_ch();
+		}
+		for (int i=0; i < str.size(); i++) {
+			ch->set_ch(str[i], color, style);
+			ch->set_next_ch(new bufferCh);
+			ch = ch->return_next_ch();
+		}
+		ch->set_ch('\0');
+		buffer_len = buffer_len + str.size();
+	} else {
+		throw_error(1);
 	}
-	for (int i=0; i < str.size(); i++) {
-		ch->set_ch(str[i], color, style);
-		ch->set_next_ch(new bufferCh);
-		ch = ch->return_next_ch();
-	}
-	ch->set_ch('\0');
-	buffer_len = buffer_len + str.size();
 }
 
 void prntspot::extend_buffer() {
@@ -149,50 +165,66 @@ void prntspot::extend_buffer() {
 }
 
 void prntspot::set_right_buffer(std::string str) {
-	extend_buffer();
-	bufferCh* ch = first_ch;
-	for (int n=0; n < (buffer_len - str.size()); n++) {
-		ch = ch->return_next_ch();
-	}
-	for (int i=0; i < str.size(); i++) {
-		ch->set_ch(str[i]);
-		ch = ch->return_next_ch();
+	if (str.size() <= max_width()) {
+		extend_buffer();
+		bufferCh* ch = first_ch;
+		for (int n=0; n < (buffer_len - str.size()); n++) {
+			ch = ch->return_next_ch();
+		}
+		for (int i=0; i < str.size(); i++) {
+			ch->set_ch(str[i]);
+			ch = ch->return_next_ch();
+		}
+	} else {
+		throw_error(1);
 	}
 }
 
 void prntspot::set_right_buffer(std::string str, int color, int style) {
-	extend_buffer();
-	bufferCh* ch = first_ch;
-	for (int n=0; n < (buffer_len - str.size()); n++) {
-		ch = ch->return_next_ch();
-	}
-	for (int i=0; i < str.size(); i++) {
-		ch->set_ch(str[i], color, style);
-		ch = ch->return_next_ch();
+	if (str.size() <= max_width()) {
+		extend_buffer();
+		bufferCh* ch = first_ch;
+		for (int n=0; n < (buffer_len - str.size()); n++) {
+			ch = ch->return_next_ch();
+		}
+		for (int i=0; i < str.size(); i++) {
+			ch->set_ch(str[i], color, style);
+			ch = ch->return_next_ch();
+		}
+	} else {
+		throw_error(1);
 	}
 }
 
 void prntspot::set_point_buffer(std::string str, int offset) {
-	extend_buffer();
-	bufferCh* ch = first_ch;
-	for (int n=0; n < offset; n++) {
-		ch = ch->return_next_ch();
-	}
-	for (int i=0; i < str.size(); i++) {
-		ch->set_ch(str[i]);
-		ch = ch->return_next_ch();
+	if (offset + str.size() <= max_width()) {
+		extend_buffer();
+		bufferCh* ch = first_ch;
+		for (int n=0; n < offset; n++) {
+			ch = ch->return_next_ch();
+		}
+		for (int i=0; i < str.size(); i++) {
+			ch->set_ch(str[i]);
+			ch = ch->return_next_ch();
+		}
+	} else {
+		throw_error(1);
 	}
 }
 
 void prntspot::set_point_buffer(std::string str, int color, int style, int offset) {
-	extend_buffer();
-	bufferCh* ch = first_ch;
-	for (int n=0; n < offset; n++) {
-		ch = ch->return_next_ch();
-	}
-	for (int i=0; i < str.size(); i++) {
-		ch->set_ch(str[i], color, style);
-		ch = ch->return_next_ch();
+	if (offset + str.size() <= max_width()) {
+		extend_buffer();
+		bufferCh* ch = first_ch;
+		for (int n=0; n < offset; n++) {
+			ch = ch->return_next_ch();
+		}
+		for (int i=0; i < str.size(); i++) {
+			ch->set_ch(str[i], color, style);
+			ch = ch->return_next_ch();
+		}
+	} else {
+		throw_error(1);
 	}
 }
 
@@ -201,4 +233,16 @@ void prntspot::set_window_size() {
 	ioctl(0, TIOCGWINSZ, &w);
 	window_width = w.ws_col;
 	window_height = w.ws_row;
+}
+
+void prntspot::throw_error(int n) {
+	std::cout << "ERROR: ";
+	switch(n) {
+	case 1:
+		std::cout << "Buffer exceeds maximum bounds.\n";
+		break;
+	default:
+		std::cout << "Unknown error\n";
+		break;
+	}
 }

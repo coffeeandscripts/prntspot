@@ -42,4 +42,5 @@ class prntspot {
 	void extend_buffer();
 	bufferCh* first_ch;
 	void set_window_size();
+	void throw_error(int);
 };
