@@ -19,7 +19,7 @@ int main() {
 	printer.print_buffer(); 					// prints to console
 	for (int x=0; x < (printer.max_width() - 11); x++) {
 		printer.set_point_buffer("#", BLUE_F, BOLD, 10+x); 	// adjusts single points
-		usleep(500000);
+		usleep(100000);
 		printer.print_buffer();
 	}
 	printer.new_line(); 						// ends line and resets bufer
@@ -28,6 +28,8 @@ int main() {
 	printer.new_line();
 }
 ~~~
+This will show the following result:
+![Workflow](https://raw.githubusercontent.com/coffeeandscripts/prntspot/master/example.gif "Above code results in this output")
 
 The library includes the following public functions:
 ~~~
