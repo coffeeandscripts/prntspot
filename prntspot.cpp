@@ -74,6 +74,7 @@ void prntspot::print_buffer() {
 
 void prntspot::new_line() {
 	std::cout << '\n';
+	reset_buffer();
 }
 
 int prntspot::max_height() {
@@ -226,6 +227,12 @@ void prntspot::set_point_buffer(std::string str, int color, int style, int offse
 	} else {
 		throw_error(1);
 	}
+}
+
+void prntspot::reset_buffer() {
+	bufferCh* ch = first_ch;
+	first_ch = new bufferCh;
+	first_ch->set_ch('\0');
 }
 
 void prntspot::set_window_size() {

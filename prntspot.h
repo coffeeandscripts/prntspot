@@ -58,6 +58,7 @@ class prntspot {
 	void append_buffer(std::string,int,int);
 	void set_right_buffer(std::string,int,int);
 	void set_point_buffer(std::string,int,int,int);
+	void reset_buffer();
 	private:
 	int window_width;
 	int window_height;

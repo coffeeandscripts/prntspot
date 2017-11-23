@@ -22,7 +22,10 @@ int main() {
 		usleep(500000);
 		printer.print_buffer();
 	}
-	printer.new_line(); 						// ends line
+	printer.new_line(); 						// ends line and resets bufer
+	printer.set_left_buffer("New line here");
+	printer.print_buffer();
+	printer.new_line();
 }
 ~~~
 
@@ -31,7 +34,7 @@ The library includes the following public functions:
 prntspot(); 						// constructor
 ~prntspot(); 						// destructor
 void print_buffer(); 					// prints line
-void new_line(); 					// ends line
+void new_line(); 					// ends line and resets buffer
 int max_height(); 					// returns height of window as int
 int max_width(); 					// returns width of window as int
 void set_left_buffer(std::string); 			// sets buffer from left

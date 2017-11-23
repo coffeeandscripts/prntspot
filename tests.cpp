@@ -16,8 +16,12 @@ int main() {
 	printer.print_buffer();
 	for (int x=0; x < (printer.max_width() - 11); x++) {
 		printer.set_point_buffer("#", BLUE_F, BOLD, 10+x);
-		usleep(500000);
+		usleep(100000);
 		printer.print_buffer();
 	}
+	printer.new_line();
+	printer.reset_buffer();
+	printer.set_left_buffer("New line here");
+	printer.print_buffer();
 	printer.new_line();
 }
