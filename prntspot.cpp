@@ -14,6 +14,10 @@ bufferCh::bufferCh() {
 	style = 0;
 }
 
+bufferCh::~bufferCh() {
+
+}
+
 void bufferCh::set_ch(char tmp_ch) {
 	ch = tmp_ch;
 }
@@ -52,6 +56,10 @@ void bufferCh::print_ch() {
 prntspot::prntspot() {
 	set_window_size();
 	first_ch = new bufferCh;
+}
+
+prntspot::~prntspot() {
+	
 }
 
 void prntspot::print_buffer() {

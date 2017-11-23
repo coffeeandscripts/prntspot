@@ -5,6 +5,7 @@
 class bufferCh {
 	public:
 	bufferCh();
+	~bufferCh();
 	void set_ch(char);
 	void set_ch(char,int,int);
 	void set_next_ch(bufferCh*);
@@ -21,6 +22,7 @@ class bufferCh {
 class prntspot {
 	public:
 	prntspot();
+	~prntspot();
 	void print_buffer();
 	void new_line();
 	int max_height();
