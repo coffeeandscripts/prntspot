@@ -10,13 +10,12 @@
 
 int main() {
 	prntspot printer;
-	printer.set_left_buffer("Loading:");
-	printer.append_buffer(" [");
-	printer.set_right_buffer("]");
-	printer.append_buffer(" Test");
+	printer.set_left_buffer("Loading:", RED_F, BOLD);
+	printer.append_buffer(" [", YELLOW_F, BOLD);
+	printer.set_right_buffer("]", YELLOW_F, BOLD);
 	printer.print_buffer();
 	for (int x=0; x < (printer.max_width() - 11); x++) {
-		printer.set_point_buffer("#", 34, 1, 10+x);
+		printer.set_point_buffer("#", BLUE_F, BOLD, 10+x);
 		usleep(500000);
 		printer.print_buffer();
 	}
