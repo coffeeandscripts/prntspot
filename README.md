@@ -4,7 +4,7 @@ C++ library to handle printing anywhere on a single line.
 
 Using simple standard library commands, this library allows for a program to print to anywhere on the same line of a console screen. This allows for interactive and variable displays. Included are colors and styles. Examples of usage are below:
 
-~~~
+~~~cpp
 #include <iostream>
 #include <string>
 #include <unistd.h>
@@ -33,7 +33,7 @@ This will show the following result:
 ![Workflow](https://raw.githubusercontent.com/coffeeandscripts/prntspot/master/ex.gif "Workflow")
 
 The library includes the following public functions:
-~~~
+~~~cpp
 prntspot(); 						// constructor
 ~prntspot(); 						// destructor
 void print_buffer(); 					// prints line
@@ -52,7 +52,7 @@ void reset_buffer(); 					// clears the buffer
 
 ~~~
 The library includes the following colors and styles:
-~~~
+~~~cpp
 // FOREGROUND COLORS
 #define BLACK_F 30
 #define RED_F 31
