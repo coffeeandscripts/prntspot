@@ -1,6 +1,6 @@
 // tests.cpp
 // desc: main function to run tests for prntspot
-// vers: 0.01
+// vers: 0.02
 
 #include <iostream>
 #include <string>
@@ -8,20 +8,25 @@
 
 #include "prntspot.h"
 
-int main() {
-	prntspot printer;
-	printer.set_left_buffer("Loading:", RED_F, BOLD);
-	printer.append_buffer(" [", YELLOW_F, BOLD);
-	printer.set_right_buffer("]", YELLOW_F, BOLD);
-	printer.print_buffer();
-	for (int x=0; x < (printer.max_width() - 11); x++) {
-		printer.set_point_buffer("#", BLUE_F, BOLD, 10+x);
+using prntspot::Foreground;
+using prntspot::Background;
+using prntspot::Style;
+
+int main()
+{
+	prntspot::prntspot printer;
+
+	printer.set_left_buffer("Loading:", Foreground::Red, Background::Default, Style::Bold);
+	printer.append_buffer(" [", Foreground::Yellow, Background::Default, Style::Bold);
+	printer.set_right_buffer("]", Foreground::Yellow, Background::Default, Style::Bold);
+	std::cout << printer << std::endl;
+
+	for (int x = 0; x < (printer.max_width() - 11); x++)
+	{
+		printer.set_point_buffer("#", Foreground::Blue, Background::Default, Style::Bold, 10 + x);
 		usleep(100000);
-		printer.print_buffer();
+		std::cout << printer;
 	}
-	printer.new_line();
-	printer.reset_buffer();
-	printer.set_left_buffer("New line here");
-	printer.print_buffer();
-	printer.new_line();
+
+	return 0;
 }

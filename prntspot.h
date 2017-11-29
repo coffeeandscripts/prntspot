@@ -1,70 +1,103 @@
 // prntspot.h
 // desc: header for prntspot and bufferCh
-// vers: 0.01
+// vers: 0.02
 
-#define BLACK_F 30
-#define RED_F 31
-#define GREEN_F 32
-#define YELLOW_F 33
-#define BLUE_F 34
-#define MAGENTA_F 35
-#define CYAN_F 36
-#define WHITE_F 37
+#ifndef PRNTSPOT_H
+#define PRNTSPOT_H
 
-#define BLACK_B 40
-#define RED_B 41
-#define GREEN_B 42
-#define YELLOW_B 43
-#define BLUE_B 44
-#define MAGENTA_B 45
-#define CYAN_B 46
-#define WHITE_B 47
+#include <ostream>
+#include <string>
 
-#define BOLD 1
-#define BRIGHT 1
-#define UNDERLINE 4
-#define INVERSE 7
+namespace prntspot
+{
+	enum class Foreground
+	{
+		Black = 30,
+		Red = 31,
+		Green = 32,
+		Yellow = 33,
+		Blue = 34,
+		Magenta = 35,
+		Cyan = 36,
+		White = 37,
+		Default = 39
+	};
 
-class bufferCh {
-	public:
-	bufferCh();
-	~bufferCh();
-	void set_ch(char);
-	void set_ch(char,int,int);
-	void set_next_ch(bufferCh*);
-	bufferCh* return_next_ch();
-	char return_ch();
-	void print_ch();
-	private:
-	bufferCh* next_ch;
-	char ch;
-	int color;
-	int style;
-};
+	enum class Background
+	{
+		Black = 40,
+		Red = 41,
+		Green = 42,
+		Yellow = 43,
+		Blue = 44,
+		Magenta = 45,
+		Cyan = 46,
+		White = 47,
+		Default = 49
+	};
 
-class prntspot {
-	public:
-	prntspot();
-	~prntspot();
-	void print_buffer();
-	void new_line();
-	int max_height();
-	int max_width();
-	void set_left_buffer(std::string);
-	void append_buffer(std::string);
-	void set_right_buffer(std::string);
-	void set_point_buffer(std::string,int);
-	void set_left_buffer(std::string,int,int);
-	void append_buffer(std::string,int,int);
-	void set_right_buffer(std::string,int,int);
-	void set_point_buffer(std::string,int,int,int);
-	void reset_buffer();
-	private:
-	int window_width;
-	int window_height;
-	int buffer_len;
-	void extend_buffer();
-	bufferCh* first_ch;
-	void set_window_size();
-	void throw_error(int);
-};
+	enum class Style
+	{
+		Default = 0,
+		Bold = 1,
+		Bright = 1,
+		Underline = 4,
+		Inverse = 7
+	};
+
+	class bufferCh
+	{
+		public:
+			bufferCh();
+			void set_ch(char);
+			void set_ch(char, Foreground, Background, Style);
+			void set_next_ch(bufferCh*);
+			bufferCh* return_next_ch();
+			char return_ch();
+
+			friend std::ostream & operator<< (std::ostream &, const bufferCh &);
+
+		private:
+			bufferCh* next_ch;
+			char ch;
+			Foreground fg_color;
+			Background bg_color;
+			Style style;
+	};
+
+	class prntspot
+	{
+		public:
+			prntspot();
+			void new_line();
+			int max_height();
+			int max_width();
+
+			void set_left_buffer(const std::string &);
+			void set_left_buffer(const std::string &, Foreground, Background, Style);
+
+			void append_buffer(const std::string &);
+			void append_buffer(const std::string &, Foreground, Background, Style);
+
+			void set_right_buffer(const std::string &);
+			void set_right_buffer(const std::string &, Foreground, Background, Style);
+
+			void set_point_buffer(const std::string &, int);
+			void set_point_buffer(const std::string &, Foreground, Background, Style, int);
+
+			void reset_buffer();
+
+			friend std::ostream & operator<< (std::ostream &, const prntspot &);
+
+		private:
+			int window_width;
+			int window_height;
+			int buffer_len;
+			void extend_buffer();
+			bufferCh* first_ch;
+			void set_window_size();
+	};
+
+}
+
+#endif // !PRNTSPOT_H
